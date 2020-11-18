@@ -7,7 +7,7 @@ use app\store\model\Category;
 use app\store\model\Goods as GoodsModel;
 use think\Session;
 use think\Url;
-
+use think\Loader;
 
 
 /**
@@ -72,52 +72,58 @@ class Index
 
 
     //支付
-   public function zhiFun($price,$user_id)
-   {
-
-       //判断有没有登录  没有的话跳转到登录页面
-       if (Session::has('user_name') == false){
-
-           return view('login/login');
-       }
+    public function zhiFun($price,$user_id)
+    {
 
 
-       $price = 1;
-       $user_id =  1;
+        //   //判断有没有登录  没有的话跳转到登录页面
+        //   if (Session::has('user_name') == false){
+        //       dump('111')
+        //       return view('login/login');
+        //   }
 
-       $codepay_id="594829";//这里改成码支付ID
-       $codepay_key="zLxdMtMoxiIFYIk3NGOEtcoTdgsZxceH"; //这是您的通讯密钥
 
-       $data = array(
-           "id" => $codepay_id,//你的码支付ID
-           "pay_id" =>$user_id, //唯一标识 可以是用户ID,用户名,session_id(),订单ID,ip 付款后返回
-           "type" => 1,//1支付宝支付 3微信支付 2QQ钱包
-           "price" => $price,//金额100元
-           "param" => "",//自定义参数
-           "notify_url"=>"",//通知地址
-           "return_url"=>"http://www.dontstop.top/Index.php?s=/home/index/jumpUrl",//跳转地址
-       ); //构造需要传递的参数
+        $price = 1;
+        $user_id =  1;
 
-       ksort($data); //重新排序$data数组
-       reset($data); //内部指针指向数组中的第一个元素
 
-       $sign = ''; //初始化需要签名的字符为空
-       $urls = ''; //初始化URL参数为空
+        $codepay_id="594829";//这里改成码支付ID
+        $codepay_key="zLxdMtMoxiIFYIk3NGOEtcoTdgsZxceH"; //这是您的通讯密钥
 
-       foreach ($data AS $key => $val) { //遍历需要传递的参数
-           if ($val == ''||$key == 'sign') continue; //跳过这些不参数签名
-           if ($sign != '') { //后面追加&拼接URL
-               $sign .= "&";
-               $urls .= "&";
-           }
-           $sign .= "$key=$val"; //拼接为url参数形式
-           $urls .= "$key=" . urlencode($val); //拼接为url参数形式并URL编码参数值
+        $data = array(
+            "id" => $codepay_id,//你的码支付ID
+            "pay_id" =>$user_id, //唯一标识 可以是用户ID,用户名,session_id(),订单ID,ip 付款后返回
+            "type" => 1,//1支付宝支付 3微信支付 2QQ钱包
+            "price" => $price,//金额100元
+            "param" => "",//自定义参数
+            "notify_url"=>"",//通知地址
+            "return_url"=>"http://81.69.56.133//Index.php?s=/home/index/jumpUrl",//跳转地址
+        ); //构造需要传递的参数
 
-       }
-       $query = $urls . '&sign=' . md5($sign .$codepay_key); //创建订单所需的参数
-       $url = "http://api5.xiuxiu888.com/creat_order/?{$query}"; //支付页面
-       header("Location:{$url}"); //跳转到支付页面
-   }
+        ksort($data); //重新排序$data数组
+        reset($data); //内部指针指向数组中的第一个元素
+
+        $sign = ''; //初始化需要签名的字符为空
+        $urls = ''; //初始化URL参数为空
+
+        foreach ($data AS $key => $val) { //遍历需要传递的参数
+            if ($val == ''||$key == 'sign') continue; //跳过这些不参数签名
+            if ($sign != '') { //后面追加&拼接URL
+                $sign .= "&";
+                $urls .= "&";
+            }
+            $sign .= "$key=$val"; //拼接为url参数形式
+            $urls .= "$key=" . urlencode($val); //拼接为url参数形式并URL编码参数值
+
+        }
+        $query = $urls . '&sign=' . md5($sign .$codepay_key); //创建订单所需的参数
+        $url = "http://api5.xiuxiu888.com/creat_order/?{$query}"; //支付页面
+
+        //跳转到支付页面
+        header ("Location:{$url}");
+        exit();
+
+    }
 
     //支付成功跳转地址
     public function jumpUrl()
