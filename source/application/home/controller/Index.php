@@ -129,9 +129,6 @@ class Index
     {
         $successModel = new SuccessUpdate();
         $data = $successModel->index();
-
-
-
         return view('success/success_order',['data'=>$data]);
 
     }
