@@ -124,7 +124,6 @@ class Index
         exit();
 
     }
-
     //支付成功跳转地址
     public function jumpUrl()
     {
