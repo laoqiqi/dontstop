@@ -20,6 +20,7 @@ class Category extends BaseModel
     public function image()
     {
         return $this->hasOne('uploadFile', 'file_id', 'image_id');
+
     }
 
     /**

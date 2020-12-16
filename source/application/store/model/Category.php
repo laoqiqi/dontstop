@@ -75,6 +75,9 @@ class Category extends CategoryModel
     //查看当前的分类
     public function cateInfo()
     {
+//        $data = Category::getALL();
+//        dump($data);die;
+
         return \think\Db::table('yoshop_category')
             ->alias('a')
             ->join('yoshop_upload_file b','a.image_id = b.file_id')

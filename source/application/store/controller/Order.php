@@ -18,10 +18,8 @@ class Order extends Controller
      */
     public function delivery_list()
     {
-        return $this->getList('待发货订单列表', [
-            'pay_status' => 20,
-            'delivery_status' => 10
-        ]);
+        $status =10;
+        return $this->getList($status);
     }
 
     /**
@@ -31,11 +29,8 @@ class Order extends Controller
      */
     public function receipt_list()
     {
-        return $this->getList('待收货订单列表', [
-            'pay_status' => 20,
-            'delivery_status' => 20,
-            'receipt_status' => 10
-        ]);
+        $status =20;
+        return $this->getList($status);
     }
 
     /**
@@ -85,11 +80,12 @@ class Order extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    private function getList($title, $filter = [])
+    private function getList($status)
     {
         $model = new OrderModel;
-        $list = $model->getList($filter);
-        return $this->fetch('index', compact('title','list'));
+        $list = $model->getList($status);
+
+        return $this->fetch('index', compact('title', 'list'));
     }
 
     /**
@@ -118,6 +114,13 @@ class Order extends Controller
         }
         $error = $model->getError() ?: '发货失败';
         return $this->renderError($error);
+    }
+
+    public function orderon($order_id,$info)
+    {
+        $model = new OrderModel;
+        $list = $model->orderon($order_id,$info);
+        return $list;
     }
 
 }

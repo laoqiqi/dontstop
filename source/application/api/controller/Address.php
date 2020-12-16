@@ -17,8 +17,9 @@ class Address extends Controller
      * @throws \app\common\exception\BaseException
      * @throws \think\exception\DbException
      */
-    public function lists()
+    public function lists($wxapp_id)
     {
+
         $user = $this->getUser();
         $model = new UserAddress;
         $list = $model->getList($user['user_id']);

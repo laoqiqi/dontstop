@@ -1,6 +1,10 @@
 <?php
 return [
-
+    'session'                => [
+        'prefix'         => 'think',
+        'type'           => '',
+        'auto_start'     => true,
+    ],
   // 定义一个常量超级管理员
   'SUPER_ADMIN'    => '10001',
   'AK' => 'kPQjg4MH5PsHU11fOTI217G2VgpO2wie',

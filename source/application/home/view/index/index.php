@@ -44,17 +44,18 @@
 			</div>
 			<!--banner end-->
 			<!--nav start-->
+
 			<div id="nav">
 				<nav class="clearfix">
-					<a href="Integral_mall.html">
+					<a href="<?=url('Index/category')?>">
 						<img src="assets/home/images/1.png" />
 						<span>鞋子列表</span>
 					</a>
-					<a href="Media.html">
+					<a href="<?=url('Index/category',['category_id'=>4])?>">
 						<img src="assets/home/images/2.png" />
 						<span>卫衣天地</span>
 					</a>
-					<a href="Birthday_zone.html">
+					<a href="<?=url('Index/category',['category_id'=>6])?>">
 						<img src="assets/home/images/3.png" />
 						<span>香水专区</span>
 					</a>
@@ -62,22 +63,37 @@
 						<img src="assets/home/images/4.png" />
 						<span>板鞋专区</span>
 					</a>
-					<a href="Inner_page.html">
+
+                    <div>
+                        <img src="assets/home/images/tishi/youhui.png"  style="display: none" class="youhui" id="youhui">
+                    </div>
+
+                    <div>
+                        <img src="assets/home/images/tishi/qq.png"  style="display: none" class="qq" id="qq">
+                    </div>
+
+                    <div>
+                        <img src="assets/home/images/tishi/weixin.png"  style="display: none" class="weixin" id="weixin">
+                    </div>
+
+					<a href="<?=url('Index/category',['category_id'=>10])?>">
 						<img src="assets/home/images/5.png" />
-						<span>运动鞋区</span>
+						<span>老爹鞋区</span>
 					</a>
-					<a href="Seasonal_selection.html">
+
+					<a href="#" class="discount">
 						<img src="assets/home/images/6.png" />
 						<span>优惠领取</span>
 					</a>
-					<a href="Inner_page.html">
-						<img src="assets/home/images/7.png" />
+					<a href="#" class="qq">
+						<img src="assets/home/images/7.png"/>
 						<span>客服QQ</span>
 					</a>
-					<a href="Inner_page.html">
+					<a href="#" class="weixin">
 						<img src="assets/home/images/8.png" />
 						<span>客服微信</span>
 					</a>
+
 					<div class="edmond clearfix">
 				      现在进QQ群或微信群立减50哦
 					<span class="sprite-icon">
@@ -85,6 +101,7 @@
 					</div>
 				</nav>
 			</div>
+
 				<!--生日专区 end-->
 				<main>
 					<div class="floor clearfix">
@@ -136,7 +153,7 @@
 
 			           		<div class="floor-container morencon">
 			         				<div class="left">
-			         					<a href="<?=url('Index/category',['$category_id'=>$cateInfo[1]['category_id']])?>"><img src="{{$cateInfo[1]['file_url']}}/{{$cateInfo[1]['file_name']}}"  style="height:243px;"/></a>
+			         					<a href="<?=url('Index/category',['$category_id'=>$cateInfo[1]['category_id']])?>"><img src="{{$cateInfo[1]['file_url']}}/{{$cateInfo[1]['file_name']}}"  style="height:250px;"/></a>
 			         				</div>
 			         			<div class="right">
 			         					<div class="top">
@@ -164,6 +181,7 @@
 									</div>
 	            				</a>
 							</div>
+
 			           		<div class="floor-container">
 			         				<div class="left">
 			         					<a href="<?=url('Index/category',['$category_id'=>$cateInfo[5]['category_id']])?>" class="line"><img src="{{$cateInfo[1]['file_url']}}/{{$cateInfo[5]['file_name']}}" style="margin-left:1px;height:248px;"/></a>
@@ -195,12 +213,12 @@
 							</div>
 			           		<div class="floor-container center clearfix">
 			         			<div class="floor_left">
-			         				<a href="Integral_mall.html" class="line"><img src="assets/home/images/integral/jf-13.png"/></a>
-			         				<a href="Integral_mall.html" class="topline"><img src="assets/home/images/integral/jf-14.png"/></a>
+			         				<a href="#" class="line"><img src="assets/home/images/integral/jf-13.png"/></a>
+			         				<a href="#" class="topline"><img src="assets/home/images/integral/jf-14.png"/></a>
 			         			</div>
 			         			<div class="foor_right">
-			         				<a href="Integral_mall.html"><img src="assets/home/images/integral/jf-15.png"/></a>
-			         				<a href="Integral_mall.html" class="addsty topline"><img src="assets/home/images/integral/jf.png"/></a>
+			         				<a href="#"><img src="assets/home/images/integral/jf-15.png"/></a>
+			         				<a href="#" class="addsty topline"><img src="assets/home/images/integral/jf.png"/></a>
 			         			</div>
 			            	</div>
 						</div>
@@ -209,6 +227,34 @@
 				</main>
 
 	</body>
+<script type="text/javascript" src="assets/home/js/jquery-1.11.3.min.js"></script>
+
+<script>
+    $('.discount').click(function(){
+
+        var display = $('#youhui').css("display");
+
+          // if (display=='block')
+          // {
+          //     console.log('1111');
+          //     $("#youhui").css("display","none");
+          // }
+            $("#youhui").css("display","block");
+            $("#qq").css("display","none");
+            $("#weixin").css("display","none");
+    });
+    $('.qq').click(function(){
+        $("#qq").css("display","block");
+        $("#youhui").css("display","none");
+        $("#weixin").css("display","none");
+
+    });
+    $('.weixin').click(function(){
+        $("#weixin").css("display","block");
+        $("#qq").css("display","none");
+        $("#youhui").css("display","none");
+    })
+</script>
 <script>
 
 	var obj = document.getElementById("3");
@@ -219,4 +265,5 @@
 
 	var obj = document.getElementById("5");
 	obj.innerHTML = obj.innerText;//这样重新设置html代码为解析后的格
+
 </script>

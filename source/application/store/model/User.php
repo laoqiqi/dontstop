@@ -26,6 +26,29 @@ class User extends UserModel
 
     }
 
+    //注册
+    public function register($username,$password)
+    {
+        //验证当前用户名是否存在
+        $status = $this->where('user_name',$username)->find();
+
+        if (!$status=='')
+        {
+          return Null;
+        }
+         return  $this->save([
+            'user_name'  => $username,
+            'password' =>  $password,
+        ]);
+
+
+    }
+
+    //获取用户信息
+    public function user_info()
+    {
+
+    }
 
 
 }

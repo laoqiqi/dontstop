@@ -4,11 +4,14 @@ use app\api\model\Setting;
 use app\store\model\SuccessUpdate;
 use app\store\model\User;
 use app\store\model\Category;
+use app\api\model\UserAddress;
+use app\store\model\GoodsSpec;
 use app\store\model\Goods as GoodsModel;
+use think\Request;
 use think\Session;
 use think\Url;
 use think\Loader;
-
+use app\home\controller\Order as OrderModel;
 
 /**
  * 前台首页
@@ -34,8 +37,9 @@ class Index
     {
         //未登录跳转到登录框
         $data = Session::has('user_name');
+
         if ($data == false) {
-            return view('Login/login');
+            return view('login/login');
         }
         //跳转到我的
         $userModel = new User();
@@ -61,7 +65,7 @@ class Index
         return view('assorement/assorement', ['catagoryInfo' => $catagoryInfo, 'cateInfo' => $cataInfo]);
     }
 
-
+    //商品详情
     public function goodsPage($goods_id)
     {
         $goodsModel = new GoodsModel;
@@ -71,20 +75,23 @@ class Index
 
 
 
+
     //支付
-    public function zhiFun($price,$user_id)
+    public function zhiFun(Request $request)
     {
 
+        $info = $request->param();
 
-        //   //判断有没有登录  没有的话跳转到登录页面
-        //   if (Session::has('user_name') == false){
-        //       dump('111')
-        //       return view('login/login');
-        //   }
+           //判断有没有登录  没有的话跳转到登录页面
+           if (Session::has('user_name') == false){
 
+               return view('login/login');
+           }
 
-        $price = 1;
-        $user_id =  1;
+        $user_id =  Session::get('user_id');
+           //查看商品价格
+        $priceModel = new GoodsSpec();
+        $price = $priceModel->price($info['goods_id']);
 
 
         $codepay_id="594829";//这里改成码支付ID
@@ -94,10 +101,10 @@ class Index
             "id" => $codepay_id,//你的码支付ID
             "pay_id" =>$user_id, //唯一标识 可以是用户ID,用户名,session_id(),订单ID,ip 付款后返回
             "type" => 1,//1支付宝支付 3微信支付 2QQ钱包
-            "price" => $price,//金额100元
+            "price" => $price['goods_price'],//金额100元
             "param" => "",//自定义参数
             "notify_url"=>"",//通知地址
-            "return_url"=>"http://81.69.56.133//Index.php?s=/home/index/jumpUrl",//跳转地址
+            "return_url"=>"http://81.69.56.133//Index.php?s=/home/index/jumpUrl?call",//跳转地址
         ); //构造需要传递的参数
 
         ksort($data); //重新排序$data数组
@@ -119,18 +126,36 @@ class Index
         $query = $urls . '&sign=' . md5($sign .$codepay_key); //创建订单所需的参数
         $url = "http://api5.xiuxiu888.com/creat_order/?{$query}"; //支付页面
 
-        //跳转到支付页面
-        header ("Location:{$url}");
-        exit();
+        $ordel = new OrderModel();
+        $data = $ordel->add($info['goods_id'],$info['address_id'],$info['number'],$info['int']);
 
+        if ($data!='')
+        {
+            //跳转到支付页面
+            header ("Location:{$url}");
+            exit();
+        }
+        if($data==null)
+        {
+            return '购买失败,请联系客服人员';
+        }
     }
+
+
     //支付成功跳转地址
     public function jumpUrl()
     {
         $successModel = new SuccessUpdate();
         $data = $successModel->index();
         return view('success/success_order',['data'=>$data]);
+    }
+
+    //记录异步通知
+    public function notification(Request $request)
+    {
+        //支付成功后读取信息
 
     }
+
 
 }

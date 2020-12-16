@@ -17,7 +17,6 @@ class UserAddress extends UserAddressModel
      * @var array
      */
     protected $hidden = [
-        'wxapp_id',
         'create_time',
         'update_time'
     ];
@@ -40,21 +39,28 @@ class UserAddress extends UserAddressModel
      */
     public function add($user, $data)
     {
+//        dump($data['params']['province_id']);die;
+        $data['region']=[];
+        $data['region'][0] = $data['params']['province_id'];
+        $data['region'][1] = $data['params']['city_id'];
+        $data['region'][2] = $data['params']['region_id'];
+
         // 添加收货地址
-        $region = explode(',', $data['region']);
-        $province_id = Region::getIdByName($region[0], 1);
-        $city_id = Region::getIdByName($region[1], 2, $province_id);
-        $region_id = Region::getIdByName($region[2], 3, $city_id);
-        $this->allowField(true)->save(array_merge([
-            'user_id' => $user['user_id'],
+//        $region = explode(',', $data['region']);
+
+        $province_id = Region::getIdByName($data['region'][0], 1);
+        $city_id = Region::getIdByName($data['region'][1], 2, $province_id);
+        $region_id = Region::getIdByName($data['region'][2], 3, $city_id);
+       return $this->allowField(true)->save(array_merge([
+            'name'    =>$data['params']['name'],
+            'detail'  =>$data['params']['detail'],
+            'phone'   =>$data['params']['phone'],
+            'user_id' => $user,
             'wxapp_id' => self::$wxapp_id,
             'province_id' => $province_id,
             'city_id' => $city_id,
             'region_id' => $region_id,
         ], $data));
-        // 设为默认收货地址
-        !$user['address_id'] && $user->save(['address_id' => $this->getLastInsID()]);
-        return true;
     }
 
     /**
@@ -64,13 +70,22 @@ class UserAddress extends UserAddressModel
      */
     public function edit($data)
     {
-        // 添加收货地址
-        $region = explode(',', $data['region']);
-        $province_id = Region::getIdByName($region[0], 1);
-        $city_id = Region::getIdByName($region[1], 2, $province_id);
-        $region_id = Region::getIdByName($region[2], 3, $city_id);
+        $data['region']=[];
+        $data['region'][0] = $data['province_id'];
+        $data['region'][1] = $data['city_id'];
+        $data['region'][2] = $data['region_id'];
+
+        $province_id = Region::getIdByName($data['region'][0], 1);
+        $city_id = Region::getIdByName($data['region'][1], 2, $province_id);
+        $region_id = Region::getIdByName($data['region'][2], 3, $city_id);
+
+        $data['province_id'] = $province_id;
+        $data['city_id'] = $city_id;
+        $data['region_id'] = $region_id;
+
         return $this->allowField(true)
-            ->save(array_merge(compact('province_id', 'city_id', 'region_id'), $data));
+            ->isUpdate(true,['address_id'=>$data['address_id']])
+            ->save(array_merge(compact('province_id', 'city_id', 'region_id'),$data));
     }
 
     /**
@@ -107,5 +122,6 @@ class UserAddress extends UserAddressModel
     {
         return self::get(compact('user_id', 'address_id'));
     }
+
 
 }

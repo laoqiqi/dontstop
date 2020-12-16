@@ -11,22 +11,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimum-scale=1.0">
     <link rel="stylesheet" href="assets/home/css/reset.css">
     <link rel="stylesheet" href="assets/home/css/index.css">
-    <title>Details_zoom</title>
+    <title>秃头商品详情</title>
 </head>
 <body>
 <div id="wrapper">
-    <div class="int_title"><span class="int_pic"><img src="assets/home/images/jifen/left.png"/></span>商品详情</div>
+    <div class="int_title"><span class="int_pic">
+            <img src="assets/home/images/jifen/left.png" class="backoff"/>
+        </span>商品详情</div>
     <div class="video details_back">
         <div class="deta_pic topline">
             <p class="deta_box"><img src="{{$goodsinfo['file_url']}}/{{$goodsinfo['file_name']}}"  style="width:100%"/></p>
             <p class="deta_con">商品姓名：{{$goodsinfo['goods_name']}}</p>
             <p class="deta_con deta_line">商品价格：{{$goodsinfo['goods_price']}}</p>
-            <div class="deta_con topline deta_height clearfix">
-                <span class="deta_display fl">请输入鞋码：</span>
-                <div class="deta_padding">
-                    <p class="supp_c_inpt perfor_input deta_top fl"><input type="button" value="-" id="plus"/><input type="text" id="txt" value="1"><input type="button" value="+" id="reduce"/></p>
-                </div>
-            </div>
         </div>
         <div class="perform topline">
             <div class="fill_name clearfix topline">
@@ -42,7 +38,6 @@
                 <div class="name_box detail_width_con">
                     <span class="detail_main">品牌及名称：{{$goodsinfo['goods_name']}}</span>
                     <span class="detail_main">型号：{{$goodsinfo['goods_no']}}</span>
-                    <span class="detail_main">规格：码</span>
                     <span class="detail_main">产地：福建</span>
                     <span class="detail_main">配送时间：下午六点之前当天发货七点出单号过了六点第二天</span>
                 </div>
@@ -52,13 +47,13 @@
 </div>
 <div id="menu" class="detail_nav_main topline" >
     <ul class="m_nav clearfix">
-        <a href="index.html"><li class="m_nav_1">
+        <a href="<?=url('index/index') ?>"><li class="m_nav_1">
 				<span class="m_nav_pic_main">
 					<img src="assets/home/images/xqq/nav_icon.png" />
 				</span>
             </li></a>
-        <a href="Shopping_Cart.html"><li class="m_nav_2">加入购物车</li></a>
-        <a href="<?=url('Index/zhiFun',['$price'=>'1','user_id'=>1])?>"><li class="m_nav_2 m_nav_fr ">立即购买</li></a>
+        <a href="#"><li class="m_nav_2">加入购物车</li></a>
+        <a href="<?=url('Order/index',['goods_id'=>$goodsinfo['goods_id']])?>"><li class="m_nav_2 m_nav_fr ">立即购买</li></a>
     </ul>
 </div>
 
@@ -72,6 +67,11 @@
 <script>
     var obj = document.getElementById("fuwen");
     obj.innerHTML = obj.innerText;//这样重新设置html代码为解析后的格
+
+    $('.backoff').click(function(){
+        window.history.go(-1);
+    })
+
 </script>
 </body>
 

@@ -5,20 +5,17 @@
     <div class="wf-search" id="search">
         <header>
             <div class="jd-logo">
-                <a href="index.html"><i class="sprite-icon"></i></a>
+                <img src="assets/home/images/logo/xrw-95.png" />
             </div>
             <div class="search">
                 <form>
                     <span class="sprite-icon"></span>
-                    <input type="search" placeholder="家用电器，每满199减100！">
+                    <input type="search" placeholder="招收代理，记得联系我哦">
                 </form>
             </div>
             <div class="login">
                 <a href="Receipt_address.html" id="loginmain">
-                    北京
-                    <font class="login_icon">
-                        <img src="images/login_icon.png" />
-                    </font>
+                    秃头
                 </a>
             </div>
         </header>

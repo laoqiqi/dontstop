@@ -7,6 +7,7 @@ use app\store\model\Delivery;
 use app\store\model\Goods as GoodsModel;
 use app\store\model\GoodsSpec;
 use think\Request;
+use think\Session;
 
 /**
  * 商品管理控制器
@@ -24,10 +25,13 @@ class Goods extends Controller
     {
         $model = new GoodsModel;
         $list = $model->getList();
-
         return $this->fetch('index', compact('list'));
     }
 
+    public function ceshi()
+    {
+        return '1111';
+    }
     /**
      * 添加商品
      * @return array|mixed
@@ -105,10 +109,13 @@ class Goods extends Controller
     }
 
     //多规格 后续开发
-    public function speCurladd(Request $request)
+    public function goodsPage(Request $request)
     {
         $info = $request->param();
-        dump($info);die;
+        $goodspecModel = new GoodsSpec;
+        $info =  $goodspecModel->goodsPage($info['goods_id']);
+
+       dump($info);die;
     }
 
 }

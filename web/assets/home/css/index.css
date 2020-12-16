@@ -1288,7 +1288,7 @@ p.season_border{
 	transition: .3s background;
 }
 /*M_password.html end*/
-/*New_address.html start*/
+/*newaddress.php start*/
 span.new{
 	display: block;
 	width: 100%;
@@ -1306,7 +1306,7 @@ p.new_ti{
 	position: absolute;
 	left: 0px;
 	right: 0px;
-	bottom: 30px;
+	bottom: -117px;
 	margin: auto;
 	text-align: center;
 	border-radius: 4px;
@@ -1318,7 +1318,7 @@ p.new_ti a{
 	color: #fff;
 	font-size: 0.7rem;
 }
-/*New_address.html end*/
+/*newaddress.php end*/
 /*Confirm_order.html start*/
 .confirm{
 	width: 100%;
@@ -1431,7 +1431,7 @@ p.new_ti a{
 	color: #fff;
 }
 /*Confirm_order.html end*/
-/*Receipt_address.html start*/
+/*address.php start*/
 ul{
 	width: 100%;
 	background: #fff;
@@ -1506,7 +1506,7 @@ ul li.addr_3:after{
 	transition: .3s background;
 	background: #D5131C;
 }
-/*Receipt_address.html end*/
+/*address.php end*/
 /*Balance_transfer start*/
 .balance{
 	width: 100%;
@@ -2133,7 +2133,7 @@ font.name_style{
 }
 .order dl.order_box{
 	width: 100%;
-	height: 6.675rem;
+	height: 8.675rem;
 	padding: 0 2%;
 	color: #333;
 }

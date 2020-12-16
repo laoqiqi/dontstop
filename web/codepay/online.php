@@ -27,7 +27,7 @@ function sendEmail($mailtitle, $mailcontent,$sendTo)
      *
      */
     //******************** 配置信息 ********************************
-    $smtpserver = "smtp.163.com";//SMTP服务器 QQ邮箱需要使用验证码而不是QQ密码
+    $smtpserver = "smtp.qq.com";//SMTP服务器 QQ邮箱需要使用验证码而不是QQ密码
     $smtpserverport = 465;//SMTP服务器端口 一般被封了25端口 需要使用SSL端口 465
     $smtpusermail = "codepay@163.com";//SMTP服务器的用户邮箱
     $smtpemailto = $sendTo?$sendTo:'13888888888@qq.com';//你接收的邮箱 比如QQ邮箱 QQ手机号邮箱 139移动邮箱

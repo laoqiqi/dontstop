@@ -16,31 +16,31 @@ class Controller extends ThinkController
     const JSON_SUCCESS_STATUS = 1;
     const JSON_ERROR_STATUS = 0;
 
-    /* @ver $wxapp_id 小程序id */
-    protected $wxapp_id;
-
-    /**
-     * 基类初始化
-     * @throws BaseException
-     */
-    public function _initialize()
-    {
-        // 当前小程序id
-        $this->wxapp_id = $this->getWxappId();
-    }
-
-    /**
-     * 获取当前小程序ID
-     * @return mixed
-     * @throws BaseException
-     */
-    private function getWxappId()
-    {
-        if (!$wxapp_id = $this->request->param('wxapp_id')) {
-            throw new BaseException(['msg' => '缺少必要的参数：wxapp_id']);
-        }
-        return $wxapp_id;
-    }
+//    /* @ver $wxapp_id 小程序id */
+//    protected $wxapp_id;
+//
+//    /**
+//     * 基类初始化
+//     * @throws BaseException
+//     */
+//    public function _initialize()
+//    {
+//        // 当前小程序id
+//        $this->wxapp_id = $this->getWxappId();
+//    }
+//
+//    /**
+//     * 获取当前小程序ID
+//     * @return mixed
+//     * @throws BaseException
+//     */
+//    private function getWxappId()
+//    {
+//        if (!$wxapp_id = $this->request->param('wxapp_id')) {
+//            throw new BaseException(['msg' => '缺少必要的参数：wxapp_id']);
+//        }
+//        return $wxapp_id;
+//    }
 
     /**
      * 获取当前用户信息

@@ -23,7 +23,7 @@
     <ul>
         <li><a href="index.php" class="red"><font class="iconfont">&#xe612;</font><span class="inco_txt">首页</span></a></li>
         <li><a href="<?=url('Index/category')?>"><font class="iconfont">&#xe660;</font><span class="inco_txt">分类</span></a></li>
-        <li><a href="Shopping_Cart.html"><font class="iconfont index">&#xe63e;</font><span class="inco_txt">购物车</span></a></li>
+        <li><a href="#"><font class="iconfont index">&#xe63e;</font><span class="inco_txt">购物车</span></a></li>
         <li><a href="<?=url('Index/my')?>"><font class="iconfont">&#xe62e;</font><span class="inco_txt">我的</span></a></li>
     </ul>
 </div>

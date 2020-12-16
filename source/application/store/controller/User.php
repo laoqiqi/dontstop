@@ -21,7 +21,9 @@ class User extends Controller
     public function index()
     {
         $model = new UserModel;
-        $list = $model->getList();
+
+        $list = $model->getUser();
+
         return $this->fetch('index', compact('list'));
     }
 

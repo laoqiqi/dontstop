@@ -80,4 +80,10 @@ class GoodsSpec extends GoodsSpecModel
         return $specurlinfo;
     }
 
+    //根据goods_id查看商品价格
+    public function price($goods_id)
+    {
+         return $this->where('goods_id',$goods_id)->field('goods_price')->find();
+    }
+
 }

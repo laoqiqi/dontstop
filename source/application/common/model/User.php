@@ -1,7 +1,6 @@
 <?php
 
 namespace app\common\model;
-
 use think\Request;
 
 /**
@@ -56,6 +55,19 @@ class User extends BaseModel
             ->paginate(15, false, ['query' => $request->request()]);
     }
 
+
+    /**
+     * 获取用户列表
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public function getUser()
+    {
+       $data =  $this->field('user_id,user_name,password,create_time')->paginate(15);
+       return $data;
+    }
+
+
     /**
      * 获取用户信息
      * @param $where
@@ -64,6 +76,7 @@ class User extends BaseModel
      */
     public static function detail($where)
     {
+
         return self::get($where, ['address', 'addressDefault']);
     }
 
